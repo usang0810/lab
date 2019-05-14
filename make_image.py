@@ -27,7 +27,7 @@ tt = androguard_output.read()
 # print(type(tt))
 b = int(tt,16)
 
-photo_image = PIL.Image.frombytes('P', (500, 500), b.to_bytes(int(len(tt)/2), sys.byteorder))
+photo_image = PIL.Image.frombytes('P', (299, 299), b.to_bytes(int(len(tt)/2), sys.byteorder))
 photo_image.save(path + file_name+'_img.png')
 
 # photo_infile = io.StringIO(str(b.to_bytes(int(len(tmp_str)/2), sys.byteorder)))

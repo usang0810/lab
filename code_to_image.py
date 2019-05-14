@@ -14,21 +14,25 @@ def make_img(dirname, img_path):
             if os.path.isdir(full_filename):
                 make_img(full_filename, img_path)
             else:
-                apk = APK(full_filename)
-                dalvik = DalvikVMFormat(apk)
+                file_split = os.path.splitext(full_filename)
+                if file_split[1] == '.apk':
+                    apk = APK(full_filename)
+                    dalvik = DalvikVMFormat(apk)
 
-                code_item = dalvik.get_codes_item()
-                code_item_str = code_item.show()
+                    code_item = dalvik.get_codes_item()
+                    code_item_str = code_item.show()
 
-                binary = int(code_item_str, 16)
+                    binary = int(code_item_str, 16)
 
-                photo_image = PIL.Image.frombytes('P', (299, 299), binary.to_bytes(int(len(code_item_str)/2), sys.byteorder))
+                    photo_image = PIL.Image.frombytes('P', (299, 299), binary.to_bytes(int(len(code_item_str)/2), sys.byteorder))
 
-                split_name = os.path.splitext(filename)
-                full_img_path = img_path + split_name[0] + '.png'
-                print(full_img_path)
-                
-                photo_image.save(full_img_path)
+                    split_name = os.path.splitext(filename)
+                    full_img_path = img_path + split_name[0] + '.png'
+                    print(full_img_path)
+                    
+                    photo_image.save(full_img_path)
+                else:
+                    pass
 
     except PermissionError:
         pass
