@@ -10,8 +10,9 @@ from PIL import Image
 
 tmp_str = ""
 path = 'C:/Users/jysrm/OneDrive/바탕 화면/study/androguard/'
+file_name = 'new.txt'
 
-androguard_output = open(path + 'new.txt','r')
+androguard_output = open(path + file_name,'r')
 # for lines in dump_output.readlines():
 # 	if lines.startswith('CODEITEMS_BYTECODE'):
 # 		tl = lines.split(' : ')[1].replace('\n','')
@@ -22,11 +23,12 @@ androguard_output = open(path + 'new.txt','r')
 # 			tl+='0'
 # 		tmp_str += tl
 tt = androguard_output.read()
-print(type(tt))
+# print(tt)
+# print(type(tt))
 b = int(tt,16)
 
-photo_image = PIL.Image.frombytes('P', (299, 299), b.to_bytes(int(len(tmp_str)/2), sys.byteorder))
-photo_image.save(path + '/renew.png')
+photo_image = PIL.Image.frombytes('P', (500, 500), b.to_bytes(int(len(tt)/2), sys.byteorder))
+photo_image.save(path + file_name+'_img.png')
 
 # photo_infile = io.StringIO(str(b.to_bytes(int(len(tmp_str)/2), sys.byteorder)))
 # photo_data = b.to_bytes(int(len(tmp_str)/2), sys.byteorder)
